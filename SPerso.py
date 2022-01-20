@@ -5,7 +5,18 @@ import argparse
 
 class Characters:
     def __init__(self, name, age, phone_number, email):
-        self.__name = name
+        self.__original_name = name
+        list_name = list(name)
+        beginning = True
+        counter = 0
+        for letter in list_name:
+            if beginning:
+                list_name[counter] = list_name[counter].upper()
+            if letter == ".":
+                list_name[counter+1] = list_name[counter+1].upper()
+                beginning = False
+            counter += 1
+        self.__name = ''.join([str(each_letter) for each_letter in list_name])# convert into string
         self.__age = age
         self.__phone_number = phone_number
         self.__email = email
@@ -26,6 +37,9 @@ class Characters:
     def get_email(self):
         return self.__email
 
+    def get_original_name(self):
+        return self.__original_name
+
 
 if __name__ == "__main__":
     all_information = []
@@ -38,6 +52,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     # print(args.name)
+    args.name = args.name.lower()
     with open("phoneBook.txt", 'r') as file:
         data = file.readlines()
         # print(data)
@@ -47,7 +62,8 @@ if __name__ == "__main__":
             all_information.append(Characters(information[0], information[1], information[2], information[3]))
 
     for character in all_information:
-        if args.name == character.get_name():
+        # print(character.get_name())
+        if args.name == character.get_original_name():
             for j in args.attributs:
                 if j == "name":
                     print("Name: " + character.get_name())
