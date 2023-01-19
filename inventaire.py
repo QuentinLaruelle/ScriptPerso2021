@@ -28,7 +28,10 @@ class Product:
 
         :param name_new: str with the new name of the class
         """
-        self.__name = name_new
+        if type(name_new) == str :
+            self.__name = name_new
+        else :
+            return False
 
     def change_price(self, price_new):
         """
@@ -36,7 +39,10 @@ class Product:
 
         :param price_new: str with the new price
         """
-        self.__price = price_new
+        if type(price_new) == str :
+            self.__price = price_new
+        else :
+            return False
 
     def change_stock(self, stock_new):
         """
@@ -44,7 +50,10 @@ class Product:
 
         :param stock_new: str with the new stock
         """
-        self.__stock = stock_new
+        if type(stock_new) == str :
+            self.__stock = stock_new
+        else :
+            return False
 
     def get_stock(self):
         """
@@ -53,6 +62,7 @@ class Product:
         :return: str with the stock of the item
         """
         return int(self.__stock)
+
 
     def get_price(self):
         """
@@ -71,6 +81,8 @@ class Product:
         return self.__name
 
 
+
+
 if __name__ == "__main__":
     product_tab = [Product("Titi's back n2", "25", "123"), Product("Call of Witcher", "60", "5")]
     shopping_cart = []
@@ -79,7 +91,8 @@ if __name__ == "__main__":
         print("Welcome to MediaToys\nPlease select one of the options available:"
               "\n1)Add an item on the marketplace (admin)\n2)Modify an item (admin)\n"
               "3)Add an item into the shopping cart\n4)Go to purchase\n"
-              "5)To see all the products with their information")
+              "5)To see all the products with their information\n"
+              "6)aide")
         choice = input("Your choice(to exit press q): ")
         if choice == "1":
             if input("Admin password: ") == "admin":
@@ -200,6 +213,9 @@ if __name__ == "__main__":
                 for i in product_tab:
                     print(str(i.get_name()) + "|" + str(i.get_price()) + "€| " + str(i.get_stock()))
             print("\n\n\n")
+
+        elif choice == "6" :
+            help()
 
         elif choice == "q":
             print("See you soon!")
